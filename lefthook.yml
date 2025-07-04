@@ -1,0 +1,7 @@
+pre-commit:
+  jobs:
+    - name: Format
+      glob: "*.{html,js,ts,css,svelte,json,jsonc,yml,yaml}"
+      run: bun prettier --write {staged_files}
+    - name: Lint
+      run: bunx biome check .

@@ -1,7 +1,8 @@
-<script module>
+<script lang="ts" module>
+  import Button from "$components/example/Button.svelte";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { fn } from "storybook/test";
-  import Button from "./Button.svelte";
+  import { ButtonText } from "./lib.svelte";
 
   // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
   const { Story } = defineMeta({
@@ -14,18 +15,20 @@
         control: { type: "select" },
         options: ["small", "medium", "large"],
       },
+      primary: { control: "boolean" },
     },
     args: {
       onclick: fn(),
+      children: ButtonText,
     },
   });
 </script>
 
 <!-- More on writing stories with args: https://storybook.js.org/docs/writing-stories/args -->
-<Story name="Primary" args={{ primary: true, label: "Button" }} />
+<Story name="Primary" args={{ primary: true }} />
 
-<Story name="Secondary" args={{ label: "Button" }} />
+<Story name="Secondary" args={{ primary: false }} />
 
-<Story name="Large" args={{ size: "large", label: "Button" }} />
+<Story name="Large" args={{ size: "large" }} />
 
-<Story name="Small" args={{ size: "small", label: "Button" }} />
+<Story name="Small" args={{ size: "small" }} />

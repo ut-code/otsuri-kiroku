@@ -1,38 +1,33 @@
-# sv
+# おつり記録
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## 開発
 
-## Creating a project
+### 導入済みライブラリ
 
-If you're seeing this, you've probably already done this step. Congrats!
+- SvelteKit
+- Storybook (UI デバッグ)
+- TailwindCSS、DaisyUI (スタイリング)
+- Biome、Prettier (リンター、フォーマッター)
 
-```bash
-# create a new project in the current directory
-npx sv create
+### 環境構築
 
-# create a new project in my-app
-npx sv create my-app
+インストールするもの:
+
+- Bun
+
+実行するコマンド:
+
+```sh
+bun install
 ```
 
-## Developing
+### コマンド
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```sh
+# 開発用サーバーの起動
+bun dev
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Storybook の起動
+bun storybook
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

@@ -1,8 +1,11 @@
 {
   "name": "@packages/server",
   "type": "module",
-  "module": "index.ts",
+  "module": "main.ts",
   "private": true,
+  "exports": {
+    ".": "./main.ts"
+  },
   "devDependencies": {
     "@types/bun": "^1.2.18"
   },

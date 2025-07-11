@@ -1,7 +1,7 @@
 <script lang="ts" module>
-  import Header from "$components/example/Header.svelte";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { fn } from "storybook/test";
+  import Header from "$components/example/Header.svelte";
 
   // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
   const { Story } = defineMeta({

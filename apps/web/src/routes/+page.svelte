@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { Debounced } from "runed";
   import { page } from "$app/state";
   import { useAPI, useQuery } from "$lib";
-  import { Debounced } from "runed";
 
   const api = useAPI({ host: page.url.host });
 

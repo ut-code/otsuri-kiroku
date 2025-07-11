@@ -1,7 +1,7 @@
 <script lang="ts" module>
-  import Button from "$components/example/Button.svelte";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { fn } from "storybook/test";
+  import Button from "$components/example/Button.svelte";
   import { ButtonText } from "./lib.svelte";
 
   // More on how to set up stories at: https://storybook.js.org/docs/writing-stories

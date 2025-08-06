@@ -10,7 +10,7 @@ The project requires `.ts` extensions for local TypeScript imports but not for S
 
 **Solution:** Using `eslint-plugin-file-extension-in-import-ts` which properly handles this distinction automatically.
 
-- ✅ Local imports: `import { foo } from "$lib/utils.ts"` 
+- ✅ Local imports: `import { foo } from "$lib/utils.ts"`
 - ✅ Virtual modules: `import { page } from "$app/stores"`
 
 ## Setup

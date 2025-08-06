@@ -43,18 +43,16 @@ export default ts.config(
           alwaysTryTypes: true,
         },
       },
-      "import/ignore": [
-        "^\\$app/",
-        "^\\$env/"
-      ],
+      "import/ignore": ["^\\$app/", "^\\$env/"],
     },
     rules: {
       // Use specialized plugin for TypeScript file extensions
       // Note: Standard import/extensions rule has difficulty with SvelteKit virtual modules ($app, $env)
       // This plugin properly handles the distinction between local files (.ts required) and virtual modules
       "file-extension-in-import-ts/file-extension-in-import-ts": [
-        "error", 
-        "always"
+        "error",
+        "always",
+        { extMapping: { ".ts": ".ts" } },
       ],
     },
   },

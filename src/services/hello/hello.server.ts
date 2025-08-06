@@ -1,30 +1,53 @@
 import { randomSelect } from "$lib/utils/array.ts";
-import { sleep } from "$lib/utils/sleep.ts";
+import { latency } from "$lib/utils/sleep.ts";
 
-const names = [
-  "World",
-  "Homer",
-  "Bart",
-  "Lisa",
-  "Maggie",
-  "Apu",
-  "Moe",
-  "Barney",
-  "Krusty",
-  "Sideshow Bob",
-  "Milhouse",
-  "Ned",
-  "Marge",
-  "Patty",
-  "Selma",
-  "Grampa",
-  "Kirk",
-  "Luann",
+const greetingStarters = [
+  "Hello",
+  "Hi",
+  "Hey",
+  "Greetings",
+  "Good day",
+  "Howdy",
+  "Welcome",
+  "Salutations",
+];
+
+const recipients = [
+  "friend",
+  "there",
+  "beautiful",
+  "champion",
+  "superstar",
+  "world",
+  "sunshine",
+  "adventurer",
+  "explorer",
+  "creator",
+  "dreamer",
+  "amazing person",
+];
+
+const endings = [
+  "!",
+  "! 🌟",
+  "! Hope you're having a great day!",
+  "! Ready for something awesome?",
+  "! You're doing great!",
+  "! Keep being amazing!",
+  "! The world is brighter with you in it!",
 ];
 
 export class HelloService {
-  async hello() {
-    await sleep(100);
-    return `Hello, ${randomSelect(names)}!`;
+  userLog: string[] = [];
+
+  async hello(name?: string) {
+    await latency(100);
+
+    const starter = randomSelect(greetingStarters);
+    const recipient = name || randomSelect(recipients);
+    const ending = randomSelect(endings);
+
+    this.userLog.push(recipient);
+    return `${starter}, ${recipient}${ending}`;
   }
 }

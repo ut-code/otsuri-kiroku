@@ -1,13 +1,14 @@
-# お釣り記録
+# Aida
 
 ## 開発
 
 ### 環境構築
 
-事前に Bun と Node.js をインストールしてください。 (npm は不要)
+事前に Bun と Node.js と NPM をインストールしてください。
 
 ```sh
 bun install
+bunx prisma db push # データベースを更新 / 作成
 ```
 
 ### コマンド

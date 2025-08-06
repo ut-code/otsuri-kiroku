@@ -10,8 +10,9 @@ const config = {
       out: "target",
     }),
     alias: {
-      $remote: "./src/lib/remote",
-      $services: "./src/services",
+      "$remote/*": "src/lib/remote/*",
+      "$services/*": "src/services/*",
+      "@/*": "src/*",
     },
     experimental: {
       remoteFunctions: true,

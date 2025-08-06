@@ -1,13 +1,12 @@
 <script lang="ts">
   import { sessionQuery } from "$remote/auth.remote.ts";
   import { signOut, useSession } from "$services/auth/auth-client.ts";
-  import GoogleLoginButton from "$services/auth/components/GoogleLoginButton.svelte";
+  import GoogleLoginButton from "$services/auth/components/GoogleLogin.svelte";
+  import SignOut from "$services/auth/components/SignOut.svelte";
   import UserInfo from "./UserInfo.svelte";
 
   const session = useSession();
   const remoteSession = sessionQuery();
-
-  let forceEnableGoogleLogin = $state(false);
 </script>
 
 <div class="container mx-auto max-w-6xl p-8">
@@ -20,27 +19,37 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
     <section class="card bg-base-200 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title">User Info (client-side)</h2>
+        <h2 class="card-title">User Info (obtained client-side)</h2>
         {#if $session.isPending}
           <p class="text-center text-base-content/70">Loading...</p>
         {:else if $session.data?.user}
+          <span class="text-lg text-success">✅ Authenticated</span>
           <UserInfo user={$session.data.user} />
         {:else}
-          <p class="text-center text-base-content/70">Logged out</p>
+          <span class="text-lg text-error">❌ Not Authenticated</span>
         {/if}
       </div>
     </section>
 
     <section class="card bg-base-200 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title">User Info (server-side)</h2>
+        <h2 class="card-title">
+          User Info (obtained server-side)
+          <button
+            onclick={async () => await remoteSession.refresh()}
+            class="btn btn-sm"
+          >
+            🔄 Refetch
+          </button>
+        </h2>
         {#await remoteSession}
           <p class="text-center text-base-content/70">Loading...</p>
         {:then session}
           {#if session?.user}
+            <span class="text-lg text-success">✅ Authenticated</span>
             <UserInfo user={session.user} />
           {:else}
-            <p class="text-center text-base-content/70">Logged out</p>
+            <span class="text-lg text-error">❌ Not Authenticated</span>
           {/if}
         {/await}
       </div>
@@ -51,30 +60,8 @@
     <div class="card-body">
       <h2 class="card-title">Actions</h2>
       <div class="card-actions">
-        <GoogleLoginButton
-          callbackURL="/demos/auth"
-          disabled={!!$session.data?.user && !forceEnableGoogleLogin}
-        />
-        {#if $session.data?.user}
-          <button
-            class="btn btn-error"
-            onclick={async () => {
-              await signOut();
-            }}
-          >
-            Sign Out
-          </button>
-        {/if}
-
-        <span class="flex-grow"></span>
-        <label class="text-sm text-base-content/70">
-          Force enable Google login
-          <input
-            type="checkbox"
-            bind:checked={forceEnableGoogleLogin}
-            class="toggle"
-          />
-        </label>
+        <GoogleLoginButton callbackURL="/demos/auth" />
+        <SignOut />
       </div>
     </div>
   </section>

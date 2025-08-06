@@ -2,13 +2,10 @@
   import type { User } from "better-auth/types";
 
   interface Props {
-    signOut?: () => Promise<void>;
     user: User;
   }
-  const { signOut, user }: Props = $props();
+  const { user }: Props = $props();
 </script>
-
-<span class="text-lg text-success">✅ Authenticated</span>
 
 <div class="space-y-2">
   {#if user.image}
@@ -34,9 +31,3 @@
     {new Date(user.createdAt).toLocaleString()}
   </p>
 </div>
-
-{#if signOut}
-  <div class="card-actions justify-end mt-4">
-    <button class="btn btn-error" onclick={signOut}> Sign Out </button>
-  </div>
-{/if}

@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
+import importPlugin from "eslint-plugin-import";
+import fileExtensionInImportTs from "eslint-plugin-file-extension-in-import-ts";
 import storybook from "eslint-plugin-storybook";
 import svelte from "eslint-plugin-svelte";
 import globals from "globals";
@@ -25,8 +27,35 @@ export default ts.config(
     },
     rules: {
       // typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
-      // see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+      // see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there are-no-typescript-errors
       "no-undef": "off",
+    },
+  },
+  {
+    files: ["**/*.ts", "**/*.svelte"],
+    plugins: {
+      import: importPlugin,
+      "file-extension-in-import-ts": fileExtensionInImportTs,
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+      "import/ignore": [
+        "^\\$app/",
+        "^\\$env/"
+      ],
+    },
+    rules: {
+      // Use specialized plugin for TypeScript file extensions
+      // Note: Standard import/extensions rule has difficulty with SvelteKit virtual modules ($app, $env)
+      // This plugin properly handles the distinction between local files (.ts required) and virtual modules
+      "file-extension-in-import-ts/file-extension-in-import-ts": [
+        "error", 
+        "always"
+      ],
     },
   },
   {

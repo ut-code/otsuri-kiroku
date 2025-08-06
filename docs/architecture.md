@@ -41,6 +41,7 @@ Example flow: `Component` → `helloQuery` (remote) → `HelloService` (server)
 ### Example Implementation
 
 **Server Service** (`src/services/hello/hello.server.ts`):
+
 ```typescript
 export class HelloService {
   async hello() {
@@ -51,6 +52,7 @@ export class HelloService {
 ```
 
 **Remote Query** (`src/lib/remote/hello.remote.ts`):
+
 ```typescript
 import { query } from "$app/server";
 import { HelloService } from "$services/hello/hello.server.ts";
@@ -63,10 +65,11 @@ export const helloQuery = query(async () => {
 ```
 
 **Component Usage**:
+
 ```svelte
 <script>
   import { helloQuery } from "$remote/hello.remote.ts";
-  
+
   const hello = helloQuery();
 </script>
 

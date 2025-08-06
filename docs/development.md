@@ -1,5 +1,18 @@
 # Development Guide
 
+## ESLint Configuration Notes
+
+### File Extension Requirements
+
+The project requires `.ts` extensions for local TypeScript imports but not for SvelteKit virtual modules.
+
+**Challenge encountered:** The standard `eslint-plugin-import`'s `import/extensions` rule has difficulty distinguishing between local files (which should require `.ts` extensions) and SvelteKit's virtual modules (`$app/*`, `$env/*`) which don't have file extensions.
+
+**Solution:** Using `eslint-plugin-file-extension-in-import-ts` which properly handles this distinction automatically.
+
+- ✅ Local imports: `import { foo } from "$lib/utils.ts"` 
+- ✅ Virtual modules: `import { page } from "$app/stores"`
+
 ## Setup
 
 Prerequisites: Install Bun and Node.js (npm not required)

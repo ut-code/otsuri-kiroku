@@ -36,7 +36,7 @@
 
 <ul>
   <h1>Encountered</h1>
-  {#each encountered as name}
+  {#each encountered as name (name)}
     <li>{name}</li>
   {/each}
 </ul>

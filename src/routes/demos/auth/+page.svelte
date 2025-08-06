@@ -1,6 +1,6 @@
 <script lang="ts">
   import { sessionQuery } from "$remote/auth.remote.ts";
-  import { signOut, useSession } from "$services/auth/auth-client.ts";
+  import { useSession } from "$services/auth/auth-client.ts";
   import GoogleLoginButton from "$services/auth/components/GoogleLogin.svelte";
   import SignOut from "$services/auth/components/SignOut.svelte";
   import UserInfo from "./UserInfo.svelte";

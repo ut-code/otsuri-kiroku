@@ -7,7 +7,7 @@
     "dev": "bun --bun vite dev",
     "build": "bun --bun vite build",
     "preview": "bun --bun vite preview",
-    "prepare": "bun sync",
+    "prepare": "bun lefthook install; bun sync",
     "sync": "svelte-kit sync || true",
     "check": "bun check:type && bun check:lint && bun check:format",
     "check:type": "bun sync && svelte-check --tsconfig ./tsconfig.json",

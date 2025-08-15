@@ -5,7 +5,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { sveltekitCookies } from "better-auth/svelte-kit";
 import { getRequestEvent } from "$app/server";
 import { env } from "../../lib/env.server.ts";
-import { prisma } from "../prisma/client.ts";
+import { prisma } from "../prisma/prisma.server.ts";
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,

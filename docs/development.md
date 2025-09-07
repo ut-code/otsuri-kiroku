@@ -43,3 +43,27 @@ bun install
 
 - Storybook with addon-vitest for component testing
 - No traditional test runner configured - uses Storybook's testing capabilities
+
+## UI/UX Features
+
+### Responsive Design
+
+- **Mobile-First**: TailwindCSS mobile-first responsive design
+- **DaisyUI Components**: Pre-built accessible components
+- **Loading States**: Consistent loading indicators across the application
+- **Error Handling**: User-friendly error messages and states
+
+### Navigation & Layout
+
+- **Clean Navigation**: Breadcrumb navigation between sections
+- **Card-based Layout**: Consistent card design pattern
+- **Responsive Grid**: Mobile and desktop optimized layouts
+
+## Remote Functions Pattern
+
+### Type-Safe Communication
+
+- **Query Functions**: Server-side data fetching with client-side reactivity
+- **Command Functions**: Server-side mutations with validation
+- **Automatic Caching**: Built-in caching and state management
+- **Real-time Updates**: Reactive queries with `.refresh()` methods

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import * as v from "valibot";
   // 保存データを localStorage から読み込み
   const Record = v.object({
@@ -14,8 +15,11 @@
 
   let records = $state<Records>([]);
 
-  $effect(() => {
-    records = v.parse(Records, JSON.parse(localStorage.getItem("records") || "[]"));
+  onMount(() => {
+    records = v.parse(
+      Records,
+      JSON.parse(localStorage.getItem("records") || "[]")
+    );
   });
 
   let lender = $state("");
@@ -45,7 +49,9 @@
   }
 
   function togglePaid(index: number) {
-    records = records.map((r, i) => (i === index ? { ...r, paid: !r.paid } : r));
+    records = records.map((r, i) =>
+      i === index ? { ...r, paid: !r.paid } : r
+    );
     localStorage.setItem("records", JSON.stringify(records));
   }
 </script>
@@ -65,7 +71,7 @@
   <button type="submit">追加</button>
 </form>
 
-{#each records as record, i}
+{#each records as record, i (i)}
   <div class="record">
     <p class={record.paid ? "paid" : ""}>
       {record.date} | {record.lender} → {record.borrower} | {record.amount}円

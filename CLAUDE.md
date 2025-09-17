@@ -32,12 +32,10 @@ Note: Prisma CLI/Studio require Node.js to be installed (app runtime is Bun).
 
 ### Key Directories
 
-- `src/lib/remote/` - Client-Server communication using Svelte Remote Functions
-- `src/services/` - Business logic (includes server-side code and client-side code)
+- `src/services/` - Domain services and Remote Functions (client/server colocated); all components live in `src/services/<service>/components/`
 
 ### Path Aliases
 
-- `$remote` → `./src/lib/remote`
 - `$services` → `./src/services`
 - `@` → `./src`
 
@@ -71,9 +69,9 @@ For detailed information, see:
     - Use `$inspect` for debugging. Good: `let count = $state(0); $inspect(count)`
 
 - Use experimental remote functions for server-client communication.
-  - Remote queries should be in `src/lib/remote/`
-  - Pattern: Component → Remote Query → Server Service
-  - Remote queries return objects with `.current` property and `.refresh()` method
+  - Remote functions should be under `src/services/<service>/*.remote.ts`, next to `*.server.ts`.
+  - Pattern: Component → Remote Function → Service logic
+  - Remote functions return objects with `.current` and `.refresh()`
 
 - **Import Requirements**: Local TypeScript imports must include `.ts` extensions
   - ✅ Local imports: `import { foo } from "$lib/utils.ts"`

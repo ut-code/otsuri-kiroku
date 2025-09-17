@@ -58,7 +58,7 @@ Notes:
 - Guards implemented in services to assert membership and minimum role.
 
 ## Remote Functions (API)
-Located under `src/lib/remote/org/*.remote.ts`, calling services in `src/services/org/*.server.ts`. Validate inputs with Valibot. Queries return objects with `.current` and `.refresh()`.
+Co-locate under `src/services/org/*.remote.ts` alongside service logic in `src/services/org/*.server.ts`. Validate inputs with Valibot. Queries return objects with `.current` and `.refresh()`.
 
 Queries
 - listUserOrgs(): organizations the current user belongs to.
@@ -102,7 +102,7 @@ Pages (scoped under `/org/[slug]`):
 - `/org/[slug]/invites` — create/revoke invite links (Admin+).
 - `/invites/accept/[token]` — accept invite; requires login.
 
-Components
+Components (place under `src/services/org/components/`)
 - OrgSwitcher.svelte — lists `listUserOrgs()`; uses `switchOrg`.
 - CreateInviteDialog.svelte — role picker; shows copyable invite link; updates lists via `.updates(...)`.
 

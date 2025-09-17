@@ -15,16 +15,14 @@
 
 ## Directory Structure
 
-- `src/lib/remote/` - Remote function definitions (client-side queries)
-- `src/services/` - Server-side business logic services
+- `src/services/` - Domain services and Remote Functions per service; all components live in `src/services/<service>/components/`
 - `src/routes/` - SvelteKit pages and layouts
-- `src/lib/utils/` - Shared utility functions
+- `src/lib/utils/` - Shared non-UI utilities
 - `src/stories/` - Storybook component stories
 - `target/` - Production build output (not `dist/`)
 
 ## Path Aliases
 
-- `$remote` → `./src/lib/remote`
 - `$services` → `./src/services`
 - `$lib` → `./src/lib` (SvelteKit default)
 
@@ -34,9 +32,9 @@ Note: Local TypeScript imports must include the `.ts` extension. SvelteKit virtu
 
 The codebase uses SvelteKit's experimental remote functions for server communication:
 
-1. **Server Services** (`src/services/`): Business logic classes
-2. **Remote Queries** (`src/lib/remote/`): Client-side query definitions that call server services
-3. **Component Usage**: Components import and use remote queries for reactive server data
+1. **Server Services** (`src/services/<service>/*.server.ts`): Business logic
+2. **Remote Functions** (`src/services/<service>/*.remote.ts`): Client-facing remote API for the service
+3. **Component Usage**: Components import and use remote functions for reactive server data
 
 Example flow: `Component` → `helloQuery` (remote) → `HelloService` (server)
 
@@ -53,7 +51,7 @@ export class HelloService {
 }
 ```
 
-**Remote Query** (`src/lib/remote/hello.remote.ts`):
+**Remote Function** (`src/services/hello/hello.remote.ts`):
 
 ```typescript
 import { query } from "$app/server";
@@ -70,7 +68,7 @@ export const helloQuery = query(async () => {
 
 ```svelte
 <script>
-  import { helloQuery } from "$remote/hello.remote.ts";
+  import { helloQuery } from "$services/hello/hello.remote.ts";
 
   const hello = helloQuery();
 </script>

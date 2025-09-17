@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { signIn, signOut, useSession } from "$services/auth/auth-client.ts";
 
   const session = useSession();
@@ -37,8 +38,7 @@
         <span>Signed in as</span>
         <span class="text-sm opacity-70">{$session.data.user.email}</span>
       </li>
-      <li><a href="/profile">Profile</a></li>
-      <li><a href="/settings">Settings</a></li>
+      <!-- Profile/Settings routes not implemented → hide until ready -->
       <div class="divider my-1"></div>
       <li><button onclick={handleSignOut}>Sign Out</button></li>
     </ul>
@@ -48,7 +48,7 @@
     <button class="btn btn-outline btn-sm" onclick={handleGoogleSignIn}>
       Sign In with Google
     </button>
-    <a href="/auth/signin" class="btn btn-primary btn-sm">
+    <a href={resolve(`/auth/signin`)} class="btn btn-primary btn-sm">
       Sign In
     </a>
   </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { sessionQuery } from "$services/auth/auth.remote";
   import { useSession } from "$services/auth/auth-client.ts";
   import GoogleLoginButton from "$services/auth/components/GoogleLogin.svelte";
@@ -11,7 +12,7 @@
 
 <div class="container mx-auto max-w-6xl p-8">
   <div class="mb-4">
-    <a href="/demos" class="btn btn-ghost btn-sm">← Back to Demos</a>
+    <a href={resolve(`/demos`)} class="btn btn-ghost btn-sm">← Back to Demos</a>
   </div>
 
   <h1 class="text-3xl font-bold mb-8">Authentication Demo</h1>

@@ -1,5 +1,17 @@
+<script lang="ts">
+  import OrgSwitcher from "$services/org/components/OrgSwitcher.svelte";
+  import { resolve } from "$app/paths";
+  
+</script>
+
 <div class="container mx-auto max-w-4xl p-8">
-  <h1 class="text-4xl font-bold mb-8">Aida - お釣り記録</h1>
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Aida - お釣り記録</h1>
+    <div class="flex items-center gap-2">
+      <a href={resolve(`/org/new`)} class="btn btn-sm">New Organization</a>
+      <OrgSwitcher />
+    </div>
+  </div>
 
   <p class="text-lg text-base-content/70 mb-8">
     Welcome to the fishing record app built with SvelteKit and experimental
@@ -13,7 +25,7 @@
         Explore the demo pages to see various features and components in action.
       </p>
       <div class="card-actions justify-end">
-        <a href="/demos" class="btn btn-primary">View Demos</a>
+        <a href={resolve(`/demos`)} class="btn btn-primary">View Demos</a>
       </div>
     </div>
   </div>

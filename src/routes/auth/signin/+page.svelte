@@ -1,6 +1,7 @@
 <script lang="ts">
   import { signIn, signUp, useSession } from "$services/auth/auth-client.ts";
   import { goto } from "$app/navigation";
+  import { resolve } from "$app/paths";
 
   let email = $state("");
   let password = $state("");
@@ -13,7 +14,7 @@
 
   $effect(() => {
     if ($session.data?.user) {
-      goto("/");
+      goto(resolve(`/`));
     }
   });
 

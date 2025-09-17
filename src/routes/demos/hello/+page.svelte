@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { greetCommand, metUsersQuery } from "$remote/hello.remote.ts";
+  import { greetCommand, metUsersQuery } from "$services/hello/hello.remote";
 
   const users = metUsersQuery();
 
@@ -19,7 +19,7 @@
   <div class="mb-4">
     <a href="/demos" class="btn btn-ghost btn-sm">← Back to Demos</a>
   </div>
-  
+
   <header class="text-center">
     <h1 class="text-4xl font-bold mb-2">Greeting Generator</h1>
     <p class="text-gray-600">Get a random friendly greeting!</p>

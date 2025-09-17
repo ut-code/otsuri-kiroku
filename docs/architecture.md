@@ -28,6 +28,8 @@
 - `$services` → `./src/services`
 - `$lib` → `./src/lib` (SvelteKit default)
 
+Note: Local TypeScript imports must include the `.ts` extension. SvelteKit virtual modules (e.g., `$app/stores`) do not require extensions.
+
 ## Remote Function Pattern
 
 The codebase uses SvelteKit's experimental remote functions for server communication:

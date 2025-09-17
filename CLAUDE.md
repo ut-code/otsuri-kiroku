@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Essential Commands
 
 - `bun dev` - Start development server (port 3000)
-- `bun build` - Build for production (outputs to `target/` directory)
+- `bun run build` - Build for production (outputs to `target/` directory)
 - `bun preview` - Preview production build
 - `bun check` - Run all checks (type + lint + format)
 - `bun check:type` - Type check only with svelte-check
@@ -27,6 +27,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `bunx prisma generate` - Generate Prisma client
 
 refer to `README.md` for more specific and up-to-date information.
+
+Note: Prisma CLI/Studio require Node.js to be installed (app runtime is Bun).
 
 ### Key Directories
 

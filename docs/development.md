@@ -18,7 +18,7 @@ The project requires `.ts` extensions for local TypeScript imports but not for S
 Prerequisites: Install Bun and Node.js (npm not required)
 
 ```sh
-bun install
+bun install --frozen-lockfile
 ```
 
 ## Development Commands

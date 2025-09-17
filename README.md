@@ -7,7 +7,7 @@
 事前に Bun と Node.js と NPM をインストールしてください。
 
 ```sh
-bun install
+bun install --frozen-lockfile
 bunx prisma db push # データベースを更新 / 作成
 ```
 

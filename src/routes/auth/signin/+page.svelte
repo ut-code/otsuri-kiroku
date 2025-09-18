@@ -2,6 +2,9 @@
   import { signIn, signUp, useSession } from "$services/auth/auth-client.ts";
   import { goto } from "$app/navigation";
   import { resolve } from "$app/paths";
+  import type { PageData } from "./$types";
+
+  const { data }: { data: PageData } = $props();
 
   let email = $state("");
   let password = $state("");
@@ -14,7 +17,8 @@
 
   $effect(() => {
     if ($session.data?.user) {
-      goto(resolve(`/`));
+      // @ts-expect-error resolve requires a route literal; we pass a sanitized dynamic path
+      goto(resolve(data.redirectTo ?? "/"));
     }
   });
 
@@ -38,6 +42,8 @@
           password,
         });
       }
+      // @ts-expect-error resolve requires a route literal; we pass a sanitized dynamic path
+      await goto(resolve(data.redirectTo ?? "/"));
     } catch (err) {
       error = err instanceof Error ? err.message : "An error occurred";
     } finally {
@@ -49,6 +55,7 @@
     try {
       await signIn.social({
         provider: "google",
+        callbackURL: data.redirectTo ?? "/",
       });
     } catch (err) {
       error = err instanceof Error ? err.message : "An error occurred";
@@ -74,12 +81,11 @@
       {/if}
 
       <form onsubmit={handleAuth}>
-        <div class="form-control mb-4">
-          <label class="label" for="email">
+        <label class="form-control mb-4">
+          <div class="label">
             <span class="label-text">Email</span>
-          </label>
+          </div>
           <input
-            id="email"
             type="email"
             placeholder="your@email.com"
             class="input input-bordered w-full"
@@ -87,30 +93,28 @@
             disabled={loading}
             required
           />
-        </div>
+        </label>
 
         {#if isSignUp}
-          <div class="form-control mb-4">
-            <label class="label" for="name">
+          <label class="form-control mb-4">
+            <div class="label">
               <span class="label-text">Name (optional)</span>
-            </label>
+            </div>
             <input
-              id="name"
               type="text"
               placeholder="Your name"
               class="input input-bordered w-full"
               bind:value={name}
               disabled={loading}
             />
-          </div>
+          </label>
         {/if}
 
-        <div class="form-control mb-6">
-          <label class="label" for="password">
+        <label class="form-control mb-6">
+          <div class="label">
             <span class="label-text">Password</span>
-          </label>
+          </div>
           <input
-            id="password"
             type="password"
             placeholder="Password"
             class="input input-bordered w-full"
@@ -118,7 +122,7 @@
             disabled={loading}
             required
           />
-        </div>
+        </label>
 
         <button
           type="submit"

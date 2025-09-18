@@ -76,6 +76,7 @@ Define these in a local `.env` (do not commit secrets):
 - **Responsive Grid**: Mobile and desktop optimized layouts
 
 ### Component Location
+
 - All components live under `src/services/<service>/components/` next to their service logic.
 - Do not place components in `src/lib`. Reserve `src/lib` for non-UI shared code (e.g., utilities).
 
@@ -87,4 +88,4 @@ Define these in a local `.env` (do not commit secrets):
 - **Command Functions**: Server-side mutations with validation
 - **Automatic Caching**: Built-in caching and state management
 - **Real-time Updates**: Reactive queries with `.refresh()` methods
- - **Location**: Place `*.remote.ts` under `src/services/<service>/` alongside related `*.server.ts` logic
+- **Location**: Place `*.remote.ts` under `src/services/<service>/` alongside related `*.server.ts` logic

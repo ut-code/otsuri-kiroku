@@ -5,4 +5,3 @@ export function newId(): string {
 export function newToken(): string {
   return crypto.randomUUID().replace(/-/g, "");
 }
-

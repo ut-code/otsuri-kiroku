@@ -30,7 +30,7 @@
 </script>
 
 <div class="space-y-6">
-  <h2 class="text-xl font-semibold">Settings</h2>
+  <h2 class="text-xl font-semibold">Overview</h2>
 
   {#if error}
     <div class="alert alert-error"><span>{error}</span></div>

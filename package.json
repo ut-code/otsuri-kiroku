@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "bun --bun vite dev",
+    "dev": "bun --env-file=./.env vite dev",
     "build": "bun --bun vite build",
     "preview": "bun --bun vite preview",
     "prepare": "bun sync",

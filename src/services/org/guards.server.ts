@@ -23,7 +23,11 @@ export async function requireMembership(orgId: string, userId: string) {
   return membership;
 }
 
-export async function requireRole(orgId: string, userId: string, minRole: OrgRole) {
+export async function requireRole(
+  orgId: string,
+  userId: string,
+  minRole: OrgRole,
+) {
   const membership = await requireMembership(orgId, userId);
   if (roleRank(membership.role as OrgRole) < roleRank(minRole)) {
     throw new Error("Forbidden: insufficient role");

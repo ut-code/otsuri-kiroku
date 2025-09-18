@@ -20,4 +20,3 @@ export function setActiveOrgIdCookie(orgId: string) {
     maxAge: 60 * 60 * 24 * 365,
   });
 }
-

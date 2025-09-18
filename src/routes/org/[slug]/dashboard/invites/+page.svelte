@@ -78,23 +78,19 @@
         <div class="overflow-x-auto">
           <table class="table">
             <thead>
-              <tr><th>Token</th><th>Role</th><th>Expires</th><th>Link</th><th></th></tr>
+              <tr><th>Role</th><th>Expires</th><th></th></tr>
             </thead>
             <tbody>
               {#each list as i (i.id)}
                 <tr>
-                  <td class="font-mono text-xs">{i.token}</td>
                   <td>{i.role}</td>
                   <td>{new Date(i.expiresAt).toLocaleString()}</td>
-                  <td>
-                    <input class="input input-bordered input-xs w-full" readonly value={`${location.origin}/invites/accept/${i.token}`} />
-                  </td>
                   <td>
                     <button class="btn btn-ghost btn-sm text-error" onclick={() => onRevoke(i.id)}>Revoke</button>
                   </td>
                 </tr>
               {:else}
-                <tr><td colspan="5">No active invites.</td></tr>
+                <tr><td colspan="3">No active invites.</td></tr>
               {/each}
             </tbody>
           </table>
@@ -103,3 +99,4 @@
     </div>
   </div>
 </div>
+

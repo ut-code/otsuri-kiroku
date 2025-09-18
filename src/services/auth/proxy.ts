@@ -1,5 +1,3 @@
-// no imports
-
 export function sanitizeRedirect(target: string): string {
   if (!target || !target.startsWith("/")) return "/";
   if (target.startsWith("//")) return "/";

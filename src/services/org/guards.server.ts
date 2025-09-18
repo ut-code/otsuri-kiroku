@@ -1,15 +1,7 @@
-import { getSession } from "@/services/auth/auth.server.ts";
 import { prisma } from "@/services/prisma/prisma.server.ts";
 import type { OrgRole } from "./types.ts";
 import { roleRank } from "./types.ts";
-
-export async function requireSession() {
-  const session = await getSession();
-  if (!session || !session.user) {
-    throw new Error("Unauthorized");
-  }
-  return session;
-}
+// Intentionally do not import requireSession here; use it from callers
 
 export async function getMembership(orgId: string, userId: string) {
   return prisma.organizationMember.findFirst({

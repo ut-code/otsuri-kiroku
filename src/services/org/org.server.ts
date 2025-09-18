@@ -1,5 +1,5 @@
 import { prisma } from "@/services/prisma/prisma.server.ts";
-import { Prisma } from "@prisma/client";
+import { Prisma, type Organization } from "@prisma/client";
 import { getSession } from "@/services/auth/auth.server.ts";
 import { normalizeSlug, validateSlug } from "@/lib/utils/slug.ts";
 import { now } from "@/lib/utils/time.ts";
@@ -8,7 +8,8 @@ import {
   getActiveOrgIdCookie,
   setActiveOrgIdCookie,
 } from "./cookies.server.ts";
-import { requireRole, requireSession } from "./guards.server.ts";
+import { requireRole } from "./guards.server.ts";
+import { requireSession } from "$services/auth/guards.server.ts";
 import type { OrgRole } from "./types.ts";
 
 async function resolveOrgId(input: { orgId?: string; slug?: string }) {
@@ -104,7 +105,7 @@ export async function createOrg(input: { name: string; image?: string }) {
   const createdAt = now();
   const slug = normalizeSlug(input.name);
   validateSlug(slug);
-  let org;
+  let org: Organization;
   try {
     org = await prisma.organization.create({
       data: {

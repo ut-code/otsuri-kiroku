@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { greetCommand, metUsersQuery } from "$services/hello/hello.remote";
 
   const users = metUsersQuery();
@@ -17,7 +18,7 @@
 
 <div class="max-w-2xl mx-auto p-8 space-y-8">
   <div class="mb-4">
-    <a href="/demos" class="btn btn-ghost btn-sm">← Back to Demos</a>
+    <a href={resolve(`/demos`)} class="btn btn-ghost btn-sm">← Back to Demos</a>
   </div>
 
   <header class="text-center">

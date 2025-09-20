@@ -1,15 +1,27 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+  import { goto } from "$app/navigation";
   import { signIn, signOut, useSession } from "$services/auth/auth-client.ts";
+  let returnTo = $state("/");
+
+  $effect(() => {
+    if (typeof window !== "undefined") {
+      returnTo = `${window.location.pathname}${window.location.search}`;
+    }
+  });
 
   const session = useSession();
 
+
   async function handleSignOut() {
     await signOut();
+    await goto(resolve("/"));
   }
 
   async function handleGoogleSignIn() {
     await signIn.social({
       provider: "google",
+      callbackURL: returnTo,
     });
   }
 </script>
@@ -37,8 +49,7 @@
         <span>Signed in as</span>
         <span class="text-sm opacity-70">{$session.data.user.email}</span>
       </li>
-      <li><a href="/profile">Profile</a></li>
-      <li><a href="/settings">Settings</a></li>
+      <!-- Profile/Settings routes not implemented → hide until ready -->
       <div class="divider my-1"></div>
       <li><button onclick={handleSignOut}>Sign Out</button></li>
     </ul>
@@ -48,7 +59,8 @@
     <button class="btn btn-outline btn-sm" onclick={handleGoogleSignIn}>
       Sign In with Google
     </button>
-    <a href="/auth/signin" class="btn btn-primary btn-sm">
+    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+    <a href={`${resolve('/auth/signin')}?redirectTo=${encodeURIComponent(returnTo)}`} class="btn btn-primary btn-sm">
       Sign In
     </a>
   </div>

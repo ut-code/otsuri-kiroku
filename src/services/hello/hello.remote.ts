@@ -1,5 +1,5 @@
 import * as v from "valibot";
-import { HelloService } from "@/services/hello/hello.server.ts";
+import { HelloService } from "@/services/hello/hello.ts";
 import { command, query } from "$app/server";
 import { unique } from "$lib/utils/array.ts";
 import { latency } from "$lib/utils/sleep.ts";

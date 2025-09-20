@@ -10,7 +10,6 @@ const config = {
       out: "target",
     }),
     alias: {
-      "$remote/*": "src/lib/remote/*",
       "$services/*": "src/services/*",
       "@/*": "src/*",
     },

@@ -15,16 +15,22 @@ The project requires `.ts` extensions for local TypeScript imports but not for S
 
 ## Setup
 
-Prerequisites: Install Bun and Node.js (npm not required)
+Prerequisites: Install Bun and Node.js
+Note: App runtime is Bun, but Prisma CLI/Studio require Node.js.
 
 ```sh
 bun install --frozen-lockfile
+
+# Initialize / update SQLite schema
+bunx prisma db push
 ```
+
+Note: `bunx prisma ...` commands require Node.js to be installed.
 
 ## Development Commands
 
 - `bun dev` - Start development server
-- `bun build` - Build for production (outputs to `target/` directory)
+- `bun run build` - Build for production (outputs to `target/` directory)
 - `bun preview` - Preview production build
 - `bun check` - Run both linting and type checking
 - `bun run check:type` - Type check with svelte-check
@@ -32,6 +38,16 @@ bun install --frozen-lockfile
 - `bun fix` - Auto-fix code formatting with prettier
 - `bun storybook` - Start Storybook development server on port 6006
 - `bun build-storybook` - Build Storybook for production
+
+## Environment Variables
+
+Define these in a local `.env` (do not commit secrets):
+
+- `DATABASE_URL`
+- `BETTER_AUTH_SECRET`
+- `BETTER_AUTH_URL`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
 
 ## Code Style
 
@@ -59,6 +75,11 @@ bun install --frozen-lockfile
 - **Card-based Layout**: Consistent card design pattern
 - **Responsive Grid**: Mobile and desktop optimized layouts
 
+### Component Location
+
+- All components live under `src/services/<service>/components/` next to their service logic.
+- Do not place components in `src/lib`. Reserve `src/lib` for non-UI shared code (e.g., utilities).
+
 ## Remote Functions Pattern
 
 ### Type-Safe Communication
@@ -67,3 +88,4 @@ bun install --frozen-lockfile
 - **Command Functions**: Server-side mutations with validation
 - **Automatic Caching**: Built-in caching and state management
 - **Real-time Updates**: Reactive queries with `.refresh()` methods
+- **Location**: Place `*.remote.ts` under `src/services/<service>/` alongside related `*.server.ts` logic

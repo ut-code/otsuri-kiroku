@@ -1,7 +1,7 @@
-import { randomSelect } from "$lib/utils/array.ts";
-import { latency } from "$lib/utils/sleep.ts";
+import { randomSelect } from "@/lib/utils/array.ts";
+import { latency } from "@/lib/utils/sleep.ts";
 
-const greetingStarters = [
+const greetingStarters: string[] = [
   "Hello",
   "Hi",
   "Hey",
@@ -10,9 +10,9 @@ const greetingStarters = [
   "Howdy",
   "Welcome",
   "Salutations",
-];
+] as const;
 
-const recipients = [
+const recipients: string[] = [
   "friend",
   "there",
   "beautiful",
@@ -25,9 +25,9 @@ const recipients = [
   "creator",
   "dreamer",
   "amazing person",
-];
+] as const;
 
-const endings = [
+const endings: string[] = [
   "!",
   "! 🌟",
   "! Hope you're having a great day!",
@@ -35,7 +35,7 @@ const endings = [
   "! You're doing great!",
   "! Keep being amazing!",
   "! The world is brighter with you in it!",
-];
+] as const;
 
 export class HelloService {
   userLog: string[] = [];
@@ -44,7 +44,7 @@ export class HelloService {
     await latency(100);
 
     const starter = randomSelect(greetingStarters);
-    const recipient = name || randomSelect(recipients);
+    const recipient = name ?? randomSelect(recipients);
     const ending = randomSelect(endings);
 
     this.userLog.push(recipient);

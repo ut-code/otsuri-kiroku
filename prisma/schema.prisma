@@ -18,6 +18,10 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  orgMembers    OrganizationMember[]
+  orgsCreated   Organization[]        @relation("UserOrganizations")
+  invitesSent   OrganizationInvite[]  @relation("InvitedByUser")
+  invitesAccepted OrganizationInvite[] @relation("AcceptedByUser")
 
   @@unique([email])
   @@map("user")
@@ -66,4 +70,54 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Organization {
+  id               String               @id
+  name             String
+  slug             String               @unique
+  image            String?
+  createdByUserId  String
+  createdByUser    User                 @relation("UserOrganizations", fields: [createdByUserId], references: [id])
+  createdAt        DateTime
+  updatedAt        DateTime
+  members          OrganizationMember[]
+  invites          OrganizationInvite[]
+
+  @@map("organization")
+}
+
+model OrganizationMember {
+  id      String @id
+  orgId   String
+  userId  String
+  role    String
+  joinedAt DateTime
+
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, userId])
+  @@index([userId])
+  @@index([orgId])
+  @@map("organization_member")
+}
+
+model OrganizationInvite {
+  id               String  @id
+  orgId            String
+  role             String
+  token            String  @unique
+  expiresAt        DateTime
+  invitedByUserId  String
+  acceptedByUserId String?
+  acceptedAt       DateTime?
+  revokedAt        DateTime?
+
+  org            Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  invitedByUser  User         @relation("InvitedByUser", fields: [invitedByUserId], references: [id], onDelete: Cascade)
+  acceptedByUser User?        @relation("AcceptedByUser", fields: [acceptedByUserId], references: [id])
+
+  @@index([orgId])
+  @@map("organization_invite")
 }
